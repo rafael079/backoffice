@@ -92,8 +92,6 @@ paths:
       - "user"
       summary: "Executa o logout do usuário"
       description: ""
-      consumes:
-      - "application/json"
       produces:
       - "application/json"
       parameters:
@@ -156,28 +154,37 @@ definitions:
   UserData:
     type: "object"
     properties:
-      email:
-        type: "string"
-        example: "angelina.jolie@teste.com"
-      password:
-        type: "string"
-        example: "123456"
-      name:
-        type: "string"
-        example: "Angelina Jolie da Silva"
       id:
         type: "integer"
         format: "int64"
-        example: 1
+        example: 1    
+      name:
+        type: "string"
+        example: "Angelina Jolie da Silva"        
+      email:
+        type: "string"
+        example: "angelina.jolie@teste.com"
+      is_active:
+        type: "boolean"
+        example: "true" 
+      is_admin:
+        type: "boolean"
+        example: "false"         
   Register:
     type: "object"
     properties:
+      name:
+        type: "string"
+        example: "Angelina Jolie da Silva"
       email:
         type: "string"
         example: "angelina.jolie@teste.com"
       password:
         type: "string"
         example: "123456"
-      name:
-        type: "string"
-        example: "Angelina Jolie da Silva"        
+      is_active:
+        type: "boolean"
+        example: "true" 
+      is_admin:
+        type: "boolean"
+        example: "false"         
