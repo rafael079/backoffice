@@ -244,7 +244,7 @@ paths:
             $ref: "#/definitions/Permissions"
         "500":
           description: "Internal Server Error"
-  "/permission/{Id}":
+  "permission/{Id}":
     put:
       tags:
       - "permissions"
@@ -275,7 +275,31 @@ paths:
           schema:
             $ref: "#/definitions/Permissions"
         "500":
-          description: "Internal Server Error"            
+          description: "Internal Server Error"  
+  "/permission/{Id}":
+    delete:
+      tags:
+      - "permissions"
+      summary: "Edita permissões"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "Id"
+        in: "path"
+        description: "ID do da permissão"
+        required: true
+        type: "integer"        
+      responses:
+        "200":
+          description: "Sucesso"
+        "500":
+          description: "Internal Server Error"           
 definitions:          
   Auth:
     type: "object"
