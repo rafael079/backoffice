@@ -145,6 +145,40 @@ paths:
           description: "Os dados enviados são inválidos"    
         "500":
           description: "Internal Server Error"
+  "user/{Id}":
+    put:
+      tags:
+      - "user"
+      summary: "Atualiza os dados de usuários"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "Id"
+        in: "path"
+        description: "ID do usuário"
+        required: true
+        type: "integer"        
+      - name: "body"
+        in: "body"
+        description: "Dados de cadastro do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/Register"             
+      responses:
+        "200":
+          description: "Usuário cadastrado com sucesso"
+          schema:
+            $ref: "#/definitions/User"
+        "422":
+          description: "Os dados enviados são inválidos"    
+        "500":
+          description: "Internal Server Error"           
   "/user/list":
     get:
       tags:
@@ -195,7 +229,33 @@ paths:
         "400":
           description: "Os dados enviados são inválidos"    
         "500":
-          description: "Internal Server Error"    
+          description: "Internal Server Error" 
+  "user/{Id}/":
+    delete:
+      tags:
+      - "user"
+      summary: "Exclui um usuário"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "Id"
+        in: "path"
+        description: "ID do usuário"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Sucesso"
+        "400":
+          description: "Os dados enviados são inválidos"    
+        "500":
+          description: "Internal Server Error"          
   "/permission/":
     get:
       tags:
