@@ -78,7 +78,12 @@ paths:
       - "application/json"
       produces:
       - "application/json"
-      parameters: []
+      parameters: 
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
       responses:
         "200":
           description: "Logout efetuado com sucesso"
@@ -89,18 +94,23 @@ paths:
   "/register":
     post:
       tags:
-      - "user"
-      summary: "Executa o logout do usuário"
+      - "auth"
+      summary: "Executa o cadastro de usuários"
       description: ""
       produces:
       - "application/json"
       parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
       - name: "body"
         in: "body"
-        description: "Dados de cadastro de usuário"
+        description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/Register" 
+          $ref: "#/definitions/Register"             
       responses:
         "200":
           description: "Usuário cadastrado com sucesso"
@@ -109,7 +119,81 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"    
         "500":
-          description: "Internal Server Error"           
+          description: "Internal Server Error" 
+  "/user/":
+    get:
+      tags:
+      - "user"
+      summary: "Obtem dados do usuário logado"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Sucesso"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "Os dados enviados são inválidos"    
+        "500":
+          description: "Internal Server Error"
+  "/user/list":
+    get:
+      tags:
+      - "user"
+      summary: "Lista todos os usuários cadastrados"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Sucesso"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "Os dados enviados são inválidos"    
+        "500":
+          description: "Internal Server Error"
+  "/user/{Id}":
+    get:
+      tags:
+      - "user"
+      summary: "Retorno usuários pelo ID"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "Id"
+        in: "path"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Sucesso"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "Os dados enviados são inválidos"    
+        "500":
+          description: "Internal Server Error"            
 definitions:          
   Auth:
     type: "object"
