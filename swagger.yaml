@@ -10,6 +10,8 @@ tags:
   description: "Serviços de autenticação"
 - name: "user"
   description: "Serviços de usuários"
+- name: "permissions"
+  description: "Serviços de usuários"  
 schemes: 
 - "http"
 paths:
@@ -107,7 +109,7 @@ paths:
         type: "string"
       - name: "body"
         in: "body"
-        description: "Dados de autenticação do usuário"
+        description: "Dados de cadastro do usuário"
         required: true
         schema:
           $ref: "#/definitions/Register"             
@@ -182,7 +184,7 @@ paths:
         type: "string"
       - name: "Id"
         in: "path"
-        description: "Token de autorização do usuário"
+        description: "ID do usuário"
         required: true
         type: "integer"
       responses:
@@ -192,6 +194,86 @@ paths:
             $ref: "#/definitions/User"
         "400":
           description: "Os dados enviados são inválidos"    
+        "500":
+          description: "Internal Server Error"    
+  "/permission/":
+    get:
+      tags:
+      - "permissions"
+      summary: "Lista Permissões cadastradas"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Sucesso"
+          schema:
+            $ref: "#/definitions/Permissions"
+        "500":
+          description: "Internal Server Error"
+  "/permission/store":
+    post:
+      tags:
+      - "permissions"
+      summary: "Adiciona novas permissões"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "Dados de autenticação do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/PermissionsStore"        
+      responses:
+        "200":
+          description: "Sucesso"
+          schema:
+            $ref: "#/definitions/Permissions"
+        "500":
+          description: "Internal Server Error"
+  "/permission/{Id}":
+    put:
+      tags:
+      - "permissions"
+      summary: "Edita permissões"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "Id"
+        in: "path"
+        description: "ID do da permissão"
+        required: true
+        type: "integer"        
+      - name: "body"
+        in: "body"
+        description: "Dados de autenticação do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/PermissionsStore"        
+      responses:
+        "200":
+          description: "Sucesso"
+          schema:
+            $ref: "#/definitions/Permissions"
         "500":
           description: "Internal Server Error"            
 definitions:          
@@ -253,7 +335,41 @@ definitions:
         example: "true" 
       is_admin:
         type: "boolean"
-        example: "false"         
+        example: "false"
+  Permissions:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: 1    
+      segment:
+        type: "string"
+        example: "Acordos"
+      name:
+        type: "string"
+        example: "Exclusão de acordos de automóvel"        
+      flag:
+        type: "string"
+        example: "exclusao-acordos-automovel" 
+      description:
+        type: "string"
+        example: "Descrição sobre esta permissão"
+  PermissionsStore:
+    type: "object"
+    properties:
+      segment:
+        type: "string"
+        example: "Acordos"
+      name:
+        type: "string"
+        example: "Exclusão de acordos de automóvel"        
+      flag:
+        type: "string"
+        example: "exclusao-acordos-automovel" 
+      description:
+        type: "string"
+        example: "Descrição sobre esta permissão"         
   Register:
     type: "object"
     properties:
