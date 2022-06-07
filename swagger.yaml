@@ -359,7 +359,57 @@ paths:
         "200":
           description: "Sucesso"
         "500":
-          description: "Internal Server Error"           
+          description: "Internal Server Error"
+  "/permission/add":
+    patch:
+      tags:
+      - "permissions"
+      summary: "Atribui permissões a usuário"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "Dados de autenticação do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/PermissionsAssign"         
+      responses:
+        "200":
+          description: "Sucesso"
+        "500":
+          description: "Internal Server Error"
+  "/permission/remove":
+    patch:
+      tags:
+      - "permissions"
+      summary: "Remove permissões a usuário"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "Dados de autenticação do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/PermissionsAssign"         
+      responses:
+        "200":
+          description: "Sucesso"
+        "500":
+          description: "Internal Server Error"          
 definitions:          
   Auth:
     type: "object"
@@ -420,6 +470,9 @@ definitions:
       is_admin:
         type: "boolean"
         example: "false"
+      permission:
+        type: "object"
+        $ref: "#/definitions/Permissions"
   Permissions:
     type: "object"
     properties:
@@ -453,7 +506,16 @@ definitions:
         example: "exclusao-acordos-automovel" 
       description:
         type: "string"
-        example: "Descrição sobre esta permissão"         
+        example: "Descrição sobre esta permissão" 
+  PermissionsAssign:
+    type: "object"
+    properties:
+      user_id:
+        type: "integer"
+        example: 1
+      permission_id:
+        type: "integer"
+        example: 5       
   Register:
     type: "object"
     properties:
