@@ -45,6 +45,34 @@ paths:
           description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
+    get:
+      tags:
+      - "auth"
+      summary: "Obtem os dados do usuário logado"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"         
+      responses:
+        "200":
+          description: "autenticado com sucesso"
+          schema:
+            $ref: '#/definitions/UserData'
+        "422":
+          description: "Os dados enviados são inválidos"
+        "400":
+          description: "Dados de fornecidos estão incorretos"  
+        "404":
+          description: "Usuário não encontrado"  
+        "500":
+          description: "Internal Server Error"      
   "/auth/refresh":
     get:
       tags:
@@ -93,40 +121,11 @@ paths:
             $ref: "#/definitions/Logout"
         "500":
           description: "Internal Server Error" 
-  "/register":
-    post:
-      tags:
-      - "auth"
-      summary: "Executa o cadastro de usuários"
-      description: ""
-      produces:
-      - "application/json"
-      parameters:
-      - name: "Authorization"
-        in: "header"
-        description: "Token de autorização do usuário"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        description: "Dados de cadastro do usuário"
-        required: true
-        schema:
-          $ref: "#/definitions/Register"             
-      responses:
-        "200":
-          description: "Usuário cadastrado com sucesso"
-          schema:
-            $ref: "#/definitions/User"
-        "422":
-          description: "Os dados enviados são inválidos"    
-        "500":
-          description: "Internal Server Error" 
   "/user/":
     get:
       tags:
       - "user"
-      summary: "Obtem dados do usuário logado"
+      summary: "Lista todos os usuários cadastrados"
       description: ""
       produces:
       - "application/json"
@@ -145,7 +144,35 @@ paths:
           description: "Os dados enviados são inválidos"    
         "500":
           description: "Internal Server Error"
-  "user/{Id}":
+    post:
+      tags:
+      - "user"
+      summary: "Executa o cadastro de usuários"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "Dados de cadastro do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/UserData"             
+      responses:
+        "200":
+          description: "Usuário cadastrado com sucesso"
+          schema:
+            $ref: "#/definitions/User"
+        "422":
+          description: "Os dados enviados são inválidos"    
+        "500":
+          description: "Internal Server Error"           
+  "/user/{Id}":
     put:
       tags:
       - "user"
@@ -179,34 +206,10 @@ paths:
           description: "Os dados enviados são inválidos"    
         "500":
           description: "Internal Server Error"           
-  "/user/list":
     get:
       tags:
       - "user"
-      summary: "Lista todos os usuários cadastrados"
-      description: ""
-      produces:
-      - "application/json"
-      parameters:
-      - name: "Authorization"
-        in: "header"
-        description: "Token de autorização do usuário"
-        required: true
-        type: "string"
-      responses:
-        "200":
-          description: "Sucesso"
-          schema:
-            $ref: "#/definitions/User"
-        "400":
-          description: "Os dados enviados são inválidos"    
-        "500":
-          description: "Internal Server Error"
-  "/user/{Id}":
-    get:
-      tags:
-      - "user"
-      summary: "Retorno usuários pelo ID"
+      summary: "Retorno usuário pelo ID"
       description: ""
       produces:
       - "application/json"
@@ -230,7 +233,6 @@ paths:
           description: "Os dados enviados são inválidos"    
         "500":
           description: "Internal Server Error" 
-  "user/{Id}/":
     delete:
       tags:
       - "user"
@@ -255,7 +257,57 @@ paths:
         "400":
           description: "Os dados enviados são inválidos"    
         "500":
-          description: "Internal Server Error"          
+          description: "Internal Server Error"
+  "/user/permission/add":
+    patch:
+      tags:
+      - "user"
+      summary: "Atribui permissões a usuário"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "Dados de autenticação do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/PermissionsAssign"         
+      responses:
+        "200":
+          description: "Sucesso"
+        "500":
+          description: "Internal Server Error"
+  "/user/permission/remove":
+    patch:
+      tags:
+      - "user"
+      summary: "Remove permissões a usuário"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "Dados de autenticação do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/PermissionsAssign"         
+      responses:
+        "200":
+          description: "Sucesso"
+        "500":
+          description: "Internal Server Error"           
   "/permission/":
     get:
       tags:
@@ -277,7 +329,6 @@ paths:
             $ref: "#/definitions/Permissions"
         "500":
           description: "Internal Server Error"
-  "/permission/store":
     post:
       tags:
       - "permissions"
@@ -304,7 +355,7 @@ paths:
             $ref: "#/definitions/Permissions"
         "500":
           description: "Internal Server Error"
-  "permission/{Id}":
+  "/permission/{Id}":
     put:
       tags:
       - "permissions"
@@ -336,7 +387,6 @@ paths:
             $ref: "#/definitions/Permissions"
         "500":
           description: "Internal Server Error"  
-  "/permission/{Id}":
     delete:
       tags:
       - "permissions"
@@ -360,56 +410,6 @@ paths:
           description: "Sucesso"
         "500":
           description: "Internal Server Error"
-  "/permission/add":
-    patch:
-      tags:
-      - "permissions"
-      summary: "Atribui permissões a usuário"
-      description: ""
-      produces:
-      - "application/json"
-      parameters:
-      - name: "Authorization"
-        in: "header"
-        description: "Token de autorização do usuário"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        description: "Dados de autenticação do usuário"
-        required: true
-        schema:
-          $ref: "#/definitions/PermissionsAssign"         
-      responses:
-        "200":
-          description: "Sucesso"
-        "500":
-          description: "Internal Server Error"
-  "/permission/remove":
-    patch:
-      tags:
-      - "permissions"
-      summary: "Remove permissões a usuário"
-      description: ""
-      produces:
-      - "application/json"
-      parameters:
-      - name: "Authorization"
-        in: "header"
-        description: "Token de autorização do usuário"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        description: "Dados de autenticação do usuário"
-        required: true
-        schema:
-          $ref: "#/definitions/PermissionsAssign"         
-      responses:
-        "200":
-          description: "Sucesso"
-        "500":
-          description: "Internal Server Error"          
 definitions:          
   Auth:
     type: "object"
