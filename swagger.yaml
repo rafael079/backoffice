@@ -471,8 +471,10 @@ definitions:
         type: "boolean"
         example: "false"
       permission:
-        type: "object"
-        $ref: "#/definitions/Permissions"
+        type: array
+        items:
+          type: "string"
+          example: "cadastro-acordos-automovel"
   Permissions:
     type: "object"
     properties:
