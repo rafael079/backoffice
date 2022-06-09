@@ -162,7 +162,7 @@ paths:
         description: "Dados de cadastro do usuário"
         required: true
         schema:
-          $ref: "#/definitions/UserData"             
+          $ref: "#/definitions/Register"             
       responses:
         "200":
           description: "Usuário cadastrado com sucesso"
@@ -473,8 +473,8 @@ definitions:
       permission:
         type: array
         items:
-          type: "string"
-          example: "cadastro-acordos-automovel"
+          type: "object"
+          $ref: "#/definitions/PermissionsUser"
   Permissions:
     type: "object"
     properties:
@@ -494,6 +494,18 @@ definitions:
       description:
         type: "string"
         example: "Descrição sobre esta permissão"
+  PermissionsUser:
+    type: "object"
+    properties:
+      segment:
+        type: "string"
+        example: "Acordos"
+      name:
+        type: "string"
+        example: "Exclusão de acordos de automóvel"        
+      flag:
+        type: "string"
+        example: "exclusao-acordos-automovel" 
   PermissionsStore:
     type: "object"
     properties:
@@ -535,4 +547,9 @@ definitions:
         example: "true" 
       is_admin:
         type: "boolean"
-        example: "false"         
+        example: "false"  
+      permission:
+        type: array
+        items:
+          type: "object"
+          $ref: "#/definitions/PermissionsUser"        
