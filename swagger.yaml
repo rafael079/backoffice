@@ -13,7 +13,9 @@ tags:
 - name: "permissions"
   description: "Serviços de usuários" 
 - name: "companies"
-  description: "Serviços de empresas"    
+  description: "Serviços de empresas"
+- name: "agreements"
+  description: "Serviços de acordos"   
 schemes: 
 - "http"
 paths:
@@ -440,6 +442,139 @@ paths:
         "404":
           description: "Usuário não encontrado"  
         "500":
+          description: "Internal Server Error"
+  "/agreement/":
+    get:
+      tags:
+      - "agreements"
+      summary: "Lista de acordos"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"          
+      responses:
+        "200":
+          description: "lista de acordos"
+          schema:
+            $ref: "#/definitions/Agreements"
+        "422":
+          description: "Os dados enviados são inválidos"
+        "400":
+          description: "Dados de fornecidos estão incorretos"  
+        "404":
+          description: "Usuário não encontrado"  
+        "500":
+          description: "Internal Server Error"
+  "/agreement/{Id}":
+    get:
+      tags:
+      - "agreements"
+      summary: "Lista de acordos"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "Id"
+        in: "path"
+        description: "ID do usuário"
+        required: true
+        type: "integer"        
+      responses:
+        "200":
+          description: "lista de acordos"
+          schema:
+            $ref: "#/definitions/Agreements"
+        "422":
+          description: "Os dados enviados são inválidos"
+        "400":
+          description: "Dados de fornecidos estão incorretos"  
+        "404":
+          description: "Usuário não encontrado"  
+        "500":
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "agreements"
+      summary: "Atualiza acordos"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "Id"
+        in: "path"
+        description: "ID do usuário"
+        required: true
+        type: "integer"
+      - name: "body"
+        in: "body"
+        description: "Dados de autenticação do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/AgreementsStore"         
+      responses:
+        "200":
+          description: "lista de acordos"
+          schema:
+            $ref: "#/definitions/Agreements"
+        "422":
+          description: "Os dados enviados são inválidos"
+        "400":
+          description: "Dados de fornecidos estão incorretos"  
+        "404":
+          description: "Usuário não encontrado"  
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+      - "agreements"
+      summary: "Lista de acordos"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "Id"
+        in: "path"
+        description: "ID do usuário"
+        required: true
+        type: "integer"        
+      responses:
+        "200":
+          description: "acordo deletado com sucesso"
+        "422":
+          description: "Os dados enviados são inválidos"
+        "400":
+          description: "Dados de fornecidos estão incorretos"  
+        "404":
+          description: "Usuário não encontrado"  
+        "500":
           description: "Internal Server Error"          
 definitions:          
   Auth:
@@ -451,6 +586,45 @@ definitions:
       password:
         type: "string"
         example: "123456"
+  Agreements:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "1"
+      code:
+        type: "integer"
+        example: "123456"
+      renter:
+        type: "string"
+        example: "localiza"
+      description:
+        type: "string"
+        example: "description here"
+      company_id:
+        type: "integer"
+        example: "2"
+      exclusive_code_agreement:
+        type: "integer"
+        example: "123456"
+  AgreementsStore:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        example: "123456"
+      renter:
+        type: "string"
+        example: "localiza|movida"
+      description:
+        type: "string"
+        example: "description here"
+      company_id:
+        type: "integer"
+        example: "2"
+      exclusive_code_agreement:
+        type: "integer"
+        example: "123456"         
   Company:
     type: "object"
     properties:
