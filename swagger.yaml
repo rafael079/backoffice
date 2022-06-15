@@ -506,6 +506,40 @@ paths:
           description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
+    post:
+      tags:
+      - "agreements"
+      summary: "Lista de acordos"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "Dados de autenticação do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/AgreementsStore"       
+      responses:
+        "200":
+          description: "lista de acordos"
+          schema:
+            $ref: "#/definitions/Agreements"
+        "422":
+          description: "Os dados enviados são inválidos"
+        "400":
+          description: "Dados de fornecidos estão incorretos"  
+        "404":
+          description: "Usuário não encontrado"  
+        "500":
+          description: "Internal Server Error"          
     put:
       tags:
       - "agreements"
