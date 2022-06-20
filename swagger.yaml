@@ -825,16 +825,19 @@ definitions:
         example: "123456"
       room_id:
         type: "string"
-        example: "aasdasdasdadsadadsad==="        
+        example: "aasdasdasdadsadadsad===" 
+        required: false
       description:
         type: "string"
         example: "description here"
+        required: false
       num_guest:
         type: "integer"
         example: "2"
       consolidator:
         type: "integer"
-        example: "1"         
+        example: "1"
+        required: false
   AgreementsCars:
     type: "object"
     properties:
@@ -993,9 +996,11 @@ definitions:
       flag:
         type: "string"
         example: "exclusao-acordos-automovel" 
+        uniqueItems: true
       description:
         type: "string"
-        example: "Descrição sobre esta permissão" 
+        example: "Descrição sobre esta permissão"
+        required: false
   PermissionsAssign:
     type: "object"
     properties:
@@ -1027,7 +1032,6 @@ definitions:
         type: "boolean"
         example: "false"
         default: false
-        required: false
       permission:
         type: array
         description: Array com permissões - opcional.
