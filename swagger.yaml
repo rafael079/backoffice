@@ -472,40 +472,6 @@ paths:
           description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
-  "/agreement/{Id}":
-    get:
-      tags:
-      - "agreements"
-      summary: "Lista de acordos"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "Authorization"
-        in: "header"
-        description: "Token de autorização do usuário"
-        required: true
-        type: "string"
-      - name: "Id"
-        in: "path"
-        description: "ID do usuário"
-        required: true
-        type: "integer"        
-      responses:
-        "200":
-          description: "lista de acordos"
-          schema:
-            $ref: "#/definitions/Agreements"
-        "422":
-          description: "Os dados enviados são inválidos"
-        "400":
-          description: "Dados de fornecidos estão incorretos"  
-        "404":
-          description: "Usuário não encontrado"  
-        "500":
-          description: "Internal Server Error"
     post:
       tags:
       - "agreements"
@@ -539,11 +505,12 @@ paths:
         "404":
           description: "Usuário não encontrado"  
         "500":
-          description: "Internal Server Error"          
-    put:
+          description: "Internal Server Error"           
+  "/agreement/{Id}":
+    get:
       tags:
       - "agreements"
-      summary: "Atualiza acordos"
+      summary: "Lista de acordos"
       description: ""
       consumes:
       - "application/json"
@@ -559,13 +526,7 @@ paths:
         in: "path"
         description: "ID do usuário"
         required: true
-        type: "integer"
-      - name: "body"
-        in: "body"
-        description: "Dados de autenticação do usuário"
-        required: true
-        schema:
-          $ref: "#/definitions/AgreementsStore"         
+        type: "integer"        
       responses:
         "200":
           description: "lista de acordos"
@@ -609,7 +570,46 @@ paths:
         "404":
           description: "Usuário não encontrado"  
         "500":
-          description: "Internal Server Error"          
+          description: "Internal Server Error"
+    put:
+      tags:
+      - "agreements"
+      summary: "Atualiza acordos"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Token de autorização do usuário"
+        required: true
+        type: "string"
+      - name: "Id"
+        in: "path"
+        description: "ID do usuário"
+        required: true
+        type: "integer"
+      - name: "body"
+        in: "body"
+        description: "Dados de autenticação do usuário"
+        required: true
+        schema:
+          $ref: "#/definitions/AgreementsStore"         
+      responses:
+        "200":
+          description: "lista de acordos"
+          schema:
+            $ref: "#/definitions/Agreements"
+        "422":
+          description: "Os dados enviados são inválidos"
+        "400":
+          description: "Dados de fornecidos estão incorretos"  
+        "404":
+          description: "Usuário não encontrado"  
+        "500":
+          description: "Internal Server Error"
 definitions:          
   Auth:
     type: "object"
@@ -799,17 +799,23 @@ definitions:
       email:
         type: "string"
         example: "angelina.jolie@teste.com"
+        uniqueItems: true
       password:
         type: "string"
         example: "123456"
+        minimum: 6
       is_active:
         type: "boolean"
-        example: "true" 
+        example: "true"
+        default: true
       is_admin:
         type: "boolean"
-        example: "false"  
+        example: "false"
+        default: false
+        required: false
       permission:
         type: array
+        description: Array com permissões - opcional.
         items:
           type: "object"
           $ref: "#/definitions/PermissionsUser"        
