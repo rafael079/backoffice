@@ -443,7 +443,7 @@ paths:
           description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
-  "/agreement/cars":
+  "/agreement/cars-rental":
     get:
       tags:
       - "agreements"
@@ -506,7 +506,7 @@ paths:
           description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"           
-  "/agreement/cars/{Id}":
+  "/agreement/cars-rental/{Id}":
     get:
       tags:
       - "agreements"
