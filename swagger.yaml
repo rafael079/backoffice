@@ -263,7 +263,7 @@ paths:
         "500":
           description: "Internal Server Error"
   "/user/permission/add":
-    patch:
+    post:
       tags:
       - "user"
       summary: "Atribui permissões a usuário"
@@ -288,7 +288,7 @@ paths:
         "500":
           description: "Internal Server Error"
   "/user/permission/remove":
-    patch:
+    post:
       tags:
       - "user"
       summary: "Remove permissões a usuário"
@@ -826,18 +826,15 @@ definitions:
       room_id:
         type: "string"
         example: "aasdasdasdadsadadsad===" 
-        required: false
       description:
         type: "string"
         example: "description here"
-        required: false
       num_guest:
         type: "integer"
         example: "2"
       consolidator:
         type: "integer"
         example: "1"
-        required: false
   AgreementsCars:
     type: "object"
     properties:
