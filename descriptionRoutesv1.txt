@@ -11,11 +11,11 @@ tags:
 - name: "user"
   description: "Serviços de usuários"
 - name: "permissions"
-  description: "Serviços de usuários"
+  description: "Serviços de usuários" 
 - name: "companies"
   description: "Serviços de empresas"
 - name: "agreements"
-  description: "Serviços de acordos"
+  description: "Serviços de acordos"   
 schemes: 
 - "http"
 paths:
@@ -35,7 +35,7 @@ paths:
         description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/Auth"
+          $ref: "#/definitions/Auth"          
       responses:
         "200":
           description: "autenticado com sucesso"
@@ -44,9 +44,9 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
     get:
@@ -63,7 +63,7 @@ paths:
         in: "header"
         description: "Token de autorização do usuário"
         required: true
-        type: "string"
+        type: "string"         
       responses:
         "200":
           description: "autenticado com sucesso"
@@ -72,11 +72,11 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
-          description: "Internal Server Error"
+          description: "Internal Server Error"      
   "/auth/refresh":
     get:
       tags:
@@ -99,7 +99,7 @@ paths:
           schema:
             $ref: "#/definitions/Authenticated"
         "400":
-          description: "Token authentication does not pass"
+          description: "Token authentication does not pass"     
         "500":
           description: "Internal Server Error"
   "/auth/logout":
@@ -124,7 +124,7 @@ paths:
           schema:
             $ref: "#/definitions/Logout"
         "500":
-          description: "Internal Server Error"
+          description: "Internal Server Error" 
   "/user":
     get:
       tags:
@@ -145,7 +145,7 @@ paths:
           schema:
             $ref: "#/definitions/User"
         "400":
-          description: "Os dados enviados são inválidos"
+          description: "Os dados enviados são inválidos"    
         "500":
           description: "Internal Server Error"
     post:
@@ -166,16 +166,16 @@ paths:
         description: "Dados de cadastro do usuário"
         required: true
         schema:
-          $ref: "#/definitions/Register"
+          $ref: "#/definitions/Register"             
       responses:
         "200":
           description: "Usuário cadastrado com sucesso"
           schema:
             $ref: "#/definitions/User"
         "422":
-          description: "Os dados enviados são inválidos"
+          description: "Os dados enviados são inválidos"    
         "500":
-          description: "Internal Server Error"
+          description: "Internal Server Error"           
   "/user/{Id}":
     put:
       tags:
@@ -194,22 +194,22 @@ paths:
         in: "path"
         description: "ID do usuário"
         required: true
-        type: "integer"
+        type: "integer"        
       - name: "body"
         in: "body"
         description: "Dados de cadastro do usuário"
         required: true
         schema:
-          $ref: "#/definitions/Register"
+          $ref: "#/definitions/Register"             
       responses:
         "200":
           description: "Usuário cadastrado com sucesso"
           schema:
             $ref: "#/definitions/User"
         "422":
-          description: "Os dados enviados são inválidos"
+          description: "Os dados enviados são inválidos"    
         "500":
-          description: "Internal Server Error"
+          description: "Internal Server Error"           
     get:
       tags:
       - "user"
@@ -234,9 +234,9 @@ paths:
           schema:
             $ref: "#/definitions/User"
         "400":
-          description: "Os dados enviados são inválidos"
+          description: "Os dados enviados são inválidos"    
         "500":
-          description: "Internal Server Error"
+          description: "Internal Server Error" 
     delete:
       tags:
       - "user"
@@ -259,7 +259,7 @@ paths:
         "200":
           description: "Sucesso"
         "400":
-          description: "Os dados enviados são inválidos"
+          description: "Os dados enviados são inválidos"    
         "500":
           description: "Internal Server Error"
   "/user/permission/add":
@@ -281,7 +281,7 @@ paths:
         description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/PermissionsAssign"
+          $ref: "#/definitions/PermissionsAssign"         
       responses:
         "200":
           description: "Sucesso"
@@ -306,12 +306,12 @@ paths:
         description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/PermissionsAssign"
+          $ref: "#/definitions/PermissionsAssign"         
       responses:
         "200":
           description: "Sucesso"
         "500":
-          description: "Internal Server Error"
+          description: "Internal Server Error"           
   "/permission":
     get:
       tags:
@@ -351,7 +351,7 @@ paths:
         description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/PermissionsStore"
+          $ref: "#/definitions/PermissionsStore"        
       responses:
         "200":
           description: "Sucesso"
@@ -377,20 +377,20 @@ paths:
         in: "path"
         description: "ID do da permissão"
         required: true
-        type: "integer"
+        type: "integer"        
       - name: "body"
         in: "body"
         description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/PermissionsStore"
+          $ref: "#/definitions/PermissionsStore"        
       responses:
         "200":
           description: "Sucesso"
           schema:
             $ref: "#/definitions/Permissions"
         "500":
-          description: "Internal Server Error"
+          description: "Internal Server Error"  
     delete:
       tags:
       - "permissions"
@@ -408,7 +408,7 @@ paths:
         in: "path"
         description: "ID do da permissão"
         required: true
-        type: "integer"
+        type: "integer"        
       responses:
         "200":
           description: "Sucesso"
@@ -429,7 +429,7 @@ paths:
         in: "header"
         description: "Token de autorização do usuário"
         required: true
-        type: "string"
+        type: "string"        
       responses:
         "200":
           description: "lista de empresas"
@@ -438,9 +438,9 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
   "/agreement/cars-rental":
@@ -458,24 +458,18 @@ paths:
         in: "header"
         description: "Token de autorização do usuário"
         required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        description: "Parâmetros para listagem dos acordos"
-        required: true
-        schema:
-          $ref: "#/definitions/AgreementsCarsIndex"
+        type: "string"          
       responses:
         "200":
           description: "lista de acordos"
           schema:
-            $ref: "#/definitions/AgreementsCarsIndex"
+            $ref: "#/definitions/AgreementsCars"
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
     post:
@@ -498,7 +492,7 @@ paths:
         description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/AgreementsCarsStore"
+          $ref: "#/definitions/AgreementsCarsStore"       
       responses:
         "200":
           description: "lista de acordos"
@@ -507,11 +501,11 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
-          description: "Internal Server Error"
+          description: "Internal Server Error"           
   "/agreement/cars-rental/{Id}":
     get:
       tags:
@@ -532,7 +526,7 @@ paths:
         in: "path"
         description: "ID do usuário"
         required: true
-        type: "integer"
+        type: "integer"        
       responses:
         "200":
           description: "lista de acordos"
@@ -541,9 +535,9 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
     delete:
@@ -565,18 +559,16 @@ paths:
         in: "path"
         description: "ID do usuário"
         required: true
-        type: "integer"
+        type: "integer"        
       responses:
         "200":
           description: "acordo deletado com sucesso"
-          schema:
-            $ref: "#/definitions/AgreementsCars"
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
     put:
@@ -604,7 +596,7 @@ paths:
         description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/AgreementsCarsPut"
+          $ref: "#/definitions/AgreementsCarsStore"         
       responses:
         "200":
           description: "lista de acordos"
@@ -613,9 +605,9 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
   "/agreement/hotels":
@@ -633,18 +625,18 @@ paths:
         in: "header"
         description: "Token de autorização do usuário"
         required: true
-        type: "string"
+        type: "string"          
       responses:
         "200":
           description: "lista de acordos"
           schema:
-            $ref: "#/definitions/AgreementsHotelsIndex"
+            $ref: "#/definitions/AgreementsHotels"
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
     post:
@@ -667,7 +659,7 @@ paths:
         description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/AgreementsHotelsStore"
+          $ref: "#/definitions/AgreementsHotelsStore"       
       responses:
         "200":
           description: "lista de acordos"
@@ -676,11 +668,11 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
-          description: "Internal Server Error"
+          description: "Internal Server Error"           
   "/agreement/hotels/{Id}":
     get:
       tags:
@@ -701,7 +693,7 @@ paths:
         in: "path"
         description: "ID do usuário"
         required: true
-        type: "integer"
+        type: "integer"        
       responses:
         "200":
           description: "lista de acordos"
@@ -710,9 +702,9 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
     delete:
@@ -734,16 +726,16 @@ paths:
         in: "path"
         description: "ID do usuário"
         required: true
-        type: "integer"
+        type: "integer"        
       responses:
         "200":
           description: "acordo deletado com sucesso"
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
           description: "Internal Server Error"
     put:
@@ -771,7 +763,7 @@ paths:
         description: "Dados de autenticação do usuário"
         required: true
         schema:
-          $ref: "#/definitions/AgreementsHotelsPut"
+          $ref: "#/definitions/AgreementsHotelsStore"         
       responses:
         "200":
           description: "lista de acordos"
@@ -780,12 +772,12 @@ paths:
         "422":
           description: "Os dados enviados são inválidos"
         "400":
-          description: "Dados de fornecidos estão incorretos"
+          description: "Dados de fornecidos estão incorretos"  
         "404":
-          description: "Usuário não encontrado"
+          description: "Usuário não encontrado"  
         "500":
-          description: "Internal Server Error"
-definitions:
+          description: "Internal Server Error"          
+definitions:          
   Auth:
     type: "object"
     properties:
@@ -795,297 +787,93 @@ definitions:
       password:
         type: "string"
         example: "123456"
-  AgreementsHotelsIndex:
-    type: "object"
-    properties:
-      data:
-        type: "array"
-        properties:
-          id:
-            type: "integer"
-            example: "205"
-          roomId:
-            type: "integer"
-            example: "5950"
-          description:
-            type: "string"
-            example: "description here"
-          guestsQuantity:
-            type: "integer"
-            example: "2"
-          price:
-            type: "integer"
-            example: "12600"
-          active:
-            type: "boolean"
-            example: "true"
-          hotelConsolidatorId:
-            type: "integer"
-            example: "4"
-          code:
-            type: "string"
-            example: "987654"
-          hotelName:
-            type: "string"
-            example: "HOTEL E RESTAURANTE"
-          hotelId:
-            type: "integer"
-            example: "14153"
-          company:
-            type: "object"
-            properties:
-              companyId:
-                type: "string"
-                example: "3746"
-              id:
-                type: "integer"
-                example: "198"
-              name:
-                type: "string"
-                example: "TECNOLOGIA LTDA"
-      meta:
-        type: "object"
-        properties:
-          pagination:
-            type: "object"
-            properties:
-              perPage:
-                type: "integer"
-                example: "1"
-              total:
-                type: "integer"
-                example: "1408"
-              last_page:
-                type: "integer"
-                example: "141"
-              current_page:
-                type: "integer"
-                example: "1"
   AgreementsHotels:
     type: "object"
     properties:
-      data:
-        type: "array"
-        properties:
-          id:
-            type: "integer"
-            example: "205"
-          roomId:
-            type: "integer"
-            example: "5950"
-          description:
-            type: "string"
-            example: "description here"
-          guestsQuantity:
-            type: "integer"
-            example: "2"
-          price:
-            type: "integer"
-            example: "12600"
-          active:
-            type: "boolean"
-            example: "true"
-          hotelConsolidatorId:
-            type: "integer"
-            example: "4"
-          code:
-            type: "string"
-            example: "987654"
-          hotelName:
-            type: "string"
-            example: "HOTEL E RESTAURANTE"
-          hotelId:
-            type: "integer"
-            example: "14153"
-          company:
-            type: "object"
-            properties:
-              companyId:
-                type: "string"
-                example: "3746"
-              id:
-                type: "integer"
-                example: "198"
-              name:
-                type: "string"
-                example: "TECNOLOGIA LTDA"
-  AgreementsHotelsPut:
-    type: "object"
-    properties:
-      price:
+      id:
         type: "integer"
-        example: "19000"
+        example: "1"
+      company_id:
+        type: "integer"
+        example: "2"
+      value:
+        type: "integer"
+        example: "123456"
+      hotel_id:
+        type: "string"
+        example: "1052810"
+      room_id:
+        type: "string"
+        example: "Lx+EE5L1ldAxW/a3Bk3cxqEx50N5x+2koYyJip5QUkvOXSAffH7pUdv1KGrNhh1TTjchsN2F9j2FB9wupk1yow=="        
       description:
         type: "string"
-        example: "description here"
-      active:
-        type: "boolean"
-        example: "true"
+        example: "acordo tal"
+      num_guest:
+        type: "integer"
+        example: "1"
+      consolidator:
+        type: "integer"
+        example: "1"
   AgreementsHotelsStore:
     type: "object"
     properties:
-      hotelId:
+      company_id:
         type: "integer"
-        example: "16746"
-      roomId:
+        example: "123"
+      value:
         type: "integer"
-        example: "6106"
-      guestsQuantity:
-        type: "integer"
-        example: "1"
-      price:
-        type: "integer"
-        example: "19000"
+        example: "123456"
+      room_id:
+        type: "string"
+        example: "aasdasdasdadsadadsad===" 
       description:
         type: "string"
         example: "description here"
-      company:
-        type: "object"
-        properties:
-          id:
-            type: "integer"
-            example: "156325"
-          name:
-            type: "string"
-            example: "Name Custumer"
-  AgreementsCarsIndex:
-    type: "object"
-    properties:
-      data:
-        type: "array"
-        properties:
-          id:
-            type: "integer"
-            example: "205"
-          code:
-            type: "integer"
-            example: "123456"
-          exclusiveCodeAgencyTravel:
-            type: "integer"
-            example: "123456"
-          description:
-            type: "string"
-            example: "description here"
-          rentalId:
-            type: "string"
-            example: "localiza"
-          active:
-            type: "boolean"
-            example: "true"
-          company:
-            type: "object"
-            properties:
-              companyId:
-                type: "string"
-                example: "3746"
-              id:
-                type: "integer"
-                example: "198"
-              name:
-                type: "string"
-                example: "TECNOLOGIA LTDA"
-      meta:
-        type: "object"
-        properties:
-          pagination:
-            type: "object"
-            properties:
-              perPage:
-                type: "integer"
-                example: "1"
-              total:
-                type: "integer"
-                example: "1408"
-              last_page:
-                type: "integer"
-                example: "141"
-              current_page:
-                type: "integer"
-                example: "1"
+      num_guest:
+        type: "integer"
+        example: "2"
+      consolidator:
+        type: "integer"
+        example: "1"
   AgreementsCars:
     type: "object"
     properties:
-      data:
-        type: "array"
-        properties:
-          id:
-            type: "integer"
-            example: "205"
-          code:
-            type: "integer"
-            example: "123456"
-          exclusiveCodeAgencyTravel:
-            type: "integer"
-            example: "123456"
-          description:
-            type: "string"
-            example: "description here"
-          rentalId:
-            type: "string"
-            example: "localiza"
-          active:
-            type: "boolean"
-            example: "true"
-          company:
-            type: "object"
-            properties:
-              companyId:
-                type: "string"
-                example: "3746"
-              id:
-                type: "integer"
-                example: "198"
-              name:
-                type: "string"
-                example: "TECNOLOGIA LTDA"
+      id:
+        type: "integer"
+        example: "1"
+      code:
+        type: "integer"
+        example: "123456"
+      renter:
+        type: "string"
+        example: "localiza"
+      description:
+        type: "string"
+        example: "description here"
+      company_id:
+        type: "integer"
+        example: "2"
+      exclusive_code_agreement:
+        type: "integer"
+        example: "123456"
   AgreementsCarsStore:
     type: "object"
     properties:
       code:
         type: "integer"
         example: "123456"
-      exclusiveCodeAgencyTravel:
-        type: "integer"
-        example: "123456"
-      renterId:
+      renter:
         type: "string"
         example: "localiza|movida"
       description:
         type: "string"
         example: "description here"
-      company:
-        type: "object"
-        properties:
-          id:
-            type: "integer"
-            example: "198"
-          name:
-            type: "string"
-            example: "TECNOLOGIA LTDA"
-  AgreementsCarsPut:
-    type: "object"
-    properties:
-      code:
-        type: "string"
-        example: "13671058"
-      exclusiveCodeAgencyTravel:
-        type: "string"
-        example: "13671058"
-      active:
-        type: "boolean"
-        example: "true"
-      description:
-        type: "string"
-        example: "description here"
-  AgreementsCarsIndex:
-    type: "object"
-    properties:
-      perPage:
+      company_id:
         type: "integer"
-        example: "1"
-      page:
+        example: "2"
+      exclusive_code_agreement:
         type: "integer"
-        example: "1"
+        example: "123456"         
   Company:
     type: "object"
     properties:
@@ -1147,13 +935,13 @@ definitions:
         example: 1    
       name:
         type: "string"
-        example: "Angelina Jolie da Silva"
+        example: "Angelina Jolie da Silva"        
       email:
         type: "string"
         example: "angelina.jolie@teste.com"
       is_active:
         type: "boolean"
-        example: "true"
+        example: "true" 
       is_admin:
         type: "boolean"
         example: "false"
@@ -1174,10 +962,10 @@ definitions:
         example: "Acordos"
       name:
         type: "string"
-        example: "Exclusão de acordos de automóvel"
+        example: "Exclusão de acordos de automóvel"        
       flag:
         type: "string"
-        example: "exclusao-acordos-automovel"
+        example: "exclusao-acordos-automovel" 
       description:
         type: "string"
         example: "Descrição sobre esta permissão"
@@ -1189,10 +977,10 @@ definitions:
         example: "Acordos"
       name:
         type: "string"
-        example: "Exclusão de acordos de automóvel"
+        example: "Exclusão de acordos de automóvel"        
       flag:
         type: "string"
-        example: "exclusao-acordos-automovel"
+        example: "exclusao-acordos-automovel" 
   PermissionsStore:
     type: "object"
     properties:
@@ -1201,10 +989,10 @@ definitions:
         example: "Acordos"
       name:
         type: "string"
-        example: "Exclusão de acordos de automóvel"
+        example: "Exclusão de acordos de automóvel"        
       flag:
         type: "string"
-        example: "exclusao-acordos-automovel"
+        example: "exclusao-acordos-automovel" 
         uniqueItems: true
       description:
         type: "string"
@@ -1246,4 +1034,4 @@ definitions:
         description: Array com permissões - opcional.
         items:
           type: "object"
-          $ref: "#/definitions/PermissionsUser"
+          $ref: "#/definitions/PermissionsUser"        
